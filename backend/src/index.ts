@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(
   cors({
-    origin: "https://meetly-chi.vercel.app",
+    origin: String(config.FRONTEND_ORIGIN),
     credentials: true,
   })
 );
