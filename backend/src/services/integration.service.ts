@@ -1,6 +1,6 @@
 import { AppDataSource } from "../config/database.config";
 import { googleOAuth2Client } from "../config/outh.config";
-import {redirectUri} from "../config/outh.config";
+// import {redirectUri} from "../config/outh.config";
 import {
   Integration,
   IntegrationAppTypeEnum,
@@ -88,6 +88,11 @@ export const connectAppService = async (
   appType: IntegrationAppTypeEnum
 ) => {
   const state = encodeState({ userId, appType });
+  
+  const redirectUri =
+    config.NODE_ENV === "production"
+    ? config.GOOGLE_REDIRECT_URI
+    : "http://localhost:8000/api/integration/google/calls";
 
   let authUrl: string;
 
