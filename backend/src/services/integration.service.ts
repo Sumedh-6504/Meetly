@@ -1,5 +1,6 @@
 import { AppDataSource } from "../config/database.config";
 import { googleOAuth2Client } from "../config/outh.config";
+import {redirectUri} from "../config/outh.config
 import {
   Integration,
   IntegrationAppTypeEnum,
@@ -97,6 +98,7 @@ export const connectAppService = async (
         scope: ["https://www.googleapis.com/auth/calendar.events"],
         prompt: "consent",
         state,
+        redirectUri: redirectUri
       });
       break;
     default:
