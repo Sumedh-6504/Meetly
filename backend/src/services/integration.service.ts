@@ -103,7 +103,7 @@ export const connectAppService = async (
         scope: ["https://www.googleapis.com/auth/calendar.events"],
         prompt: "consent",
         state,
-        redirectUri: redirectUri
+        redirect_uri: redirectUri
       });
       break;
     default:
