@@ -49,20 +49,20 @@ export const geteventListQueryFn = async (): Promise<UserEventListResponse> => {
 export const checkIntegrationQueryFn = async (
   appType: VideoConferencingPlatform
 ) => {
-  const response = await API.get(`/integration/check/${appType}`);
+  const response = await API.get(`integration/check/${appType}`);
   return response.data;
 };
 
 export const getAllIntegrationQueryFn =
   async (): Promise<GetAllIntegrationResponseType> => {
-    const response = await API.get(`/integration/all`);
+    const response = await API.get(`integration/all`);
     return response.data;
   };
 
 export const connectAppIntegrationQueryFn = async (
   appType: IntegrationAppType
 ) => {
-  const response = await API.get(`/integration/connect/${appType}`);
+  const response = await API.get(`integration/connect/${appType}`);
   return response.data;
 };
 
@@ -70,7 +70,7 @@ export const connectAppIntegrationQueryFn = async (
 
 export const getUserAvailabilityQueryFn =
   async (): Promise<UserAvailabilityResponseType> => {
-    const response = await API.get(`/api/availability/me`);
+    const response = await API.get(`/availability/me`);
     return response.data;
   };
 
@@ -87,7 +87,7 @@ export const getUserMeetingsQueryFn = async (
   filter: PeriodType
 ): Promise<UserMeetingsResponseType> => {
   const response = await API.get(
-    `/api/meeting/user/all${filter ? `?filter=${filter}` : ""}`
+    `/meeting/user/all${filter ? `?filter=${filter}` : ""}`
   );
   return response.data;
 };
