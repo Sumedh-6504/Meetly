@@ -1,7 +1,6 @@
 import { AppDataSource } from "../config/database.config";
 import { googleOAuth2Client } from "../config/outh.config";
 import {config} from "../config/app.config";
-import { config } 
 import {
   Integration,
   IntegrationAppTypeEnum,
