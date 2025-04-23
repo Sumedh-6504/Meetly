@@ -21,7 +21,7 @@ import { IntegrationAppType, VideoConferencingPlatform } from "./types";
 export const loginMutationFn = async (
   data: loginType
 ): Promise<LoginResponseType> => {
-  const response = await API.post("api/auth/login", data);
+  const response = await API.post("/api/auth/login", data);
   return response.data;
 };
 
