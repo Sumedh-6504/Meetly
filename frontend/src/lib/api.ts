@@ -21,26 +21,26 @@ import { IntegrationAppType, VideoConferencingPlatform } from "./types";
 export const loginMutationFn = async (
   data: loginType
 ): Promise<LoginResponseType> => {
-  const response = await API.post("/api/auth/login", data);
+  const response = await API.post("/auth/login", data);
   return response.data;
 };
 
 export const registerMutationFn = async (data: registerType) =>
-  await API.post("/api/auth/register", data);
+  await API.post("/auth/register", data);
 
 //*********** */ EVENT APIS
 export const CreateEventMutationFn = async (data: CreateEventPayloadType) =>
-  await API.post("/api/event/create", data);
+  await API.post("/event/create", data);
 
 export const toggleEventVisibilityMutationFn = async (data: {
   eventId: string;
 }): Promise<ToggleEventVisibilityResponseType> => {
-  const response = await API.put("/api/event/toggle-privacy", data);
+  const response = await API.put("/event/toggle-privacy", data);
   return response.data;
 };
 
 export const geteventListQueryFn = async (): Promise<UserEventListResponse> => {
-  const response = await API.get(`/api/event/all`);
+  const response = await API.get(`/event/all`);
   return response.data;
 };
 
@@ -49,20 +49,20 @@ export const geteventListQueryFn = async (): Promise<UserEventListResponse> => {
 export const checkIntegrationQueryFn = async (
   appType: VideoConferencingPlatform
 ) => {
-  const response = await API.get(`/api/integration/check/${appType}`);
+  const response = await API.get(`/integration/check/${appType}`);
   return response.data;
 };
 
 export const getAllIntegrationQueryFn =
   async (): Promise<GetAllIntegrationResponseType> => {
-    const response = await API.get(`/api/integration/all`);
+    const response = await API.get(`/integration/all`);
     return response.data;
   };
 
 export const connectAppIntegrationQueryFn = async (
   appType: IntegrationAppType
 ) => {
-  const response = await API.get(`/api/integration/connect/${appType}`);
+  const response = await API.get(`/integration/connect/${appType}`);
   return response.data;
 };
 
@@ -77,7 +77,7 @@ export const getUserAvailabilityQueryFn =
 export const updateUserAvailabilityMutationFn = async (
   data: AvailabilityType
 ) => {
-  const response = await API.put("/api/availability/update", data);
+  const response = await API.put("/availability/update", data);
   return response.data;
 };
 
@@ -93,7 +93,7 @@ export const getUserMeetingsQueryFn = async (
 };
 
 export const cancelMeetingMutationFn = async (meetingId: string) => {
-  const response = await API.put(`/api/meeting/cancel/${meetingId}`, {});
+  const response = await API.put(`/meeting/cancel/${meetingId}`, {});
   return response.data;
 };
 
@@ -101,7 +101,7 @@ export const cancelMeetingMutationFn = async (meetingId: string) => {
 export const getAllPublicEventQueryFn = async (
   username: string
 ): Promise<PublicEventResponseType> => {
-  const response = await PublicAPI.get(`/api/event/public/${username}`);
+  const response = await PublicAPI.get(`/event/public/${username}`);
   return response.data;
 };
 
@@ -110,7 +110,7 @@ export const getSinglePublicEventBySlugQueryFn = async (data: {
   slug: string;
 }): Promise<PublicSingleEventDetailResponseType> => {
   const response = await PublicAPI.get(
-    `/api/event/public/${data.username}/${data.slug}`
+    `/event/public/${data.username}/${data.slug}`
   );
   return response.data;
 };
@@ -120,7 +120,7 @@ export const getPublicAvailabilityByEventIdQueryFn = async (
   timezone?: string
 ): Promise<PublicAvailabilityEventResponseType> => {
   const response = await PublicAPI.get(
-    `/api/availability/public/${eventId}${
+    `/availability/public/${eventId}${
       timezone ? `?timezone=${timezone}` : ""
     }`
   );
@@ -129,6 +129,6 @@ export const getPublicAvailabilityByEventIdQueryFn = async (
 
 //Create Meeting Eventid
 export const scheduleMeetingMutationFn = async (data: CreateMeetingType) => {
-  const response = await API.post("/api/meeting/public/create", data);
+  const response = await API.post("/meeting/public/create", data);
   return response.data;
 };
