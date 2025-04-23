@@ -1,7 +1,7 @@
 import { google } from "googleapis";
 import { config } from "./app.config";
 
-const redirectUri =
+export const redirectUri =
   config.NODE_ENV === "production"
     ? config.GOOGLE_REDIRECT_URI
     : "http://localhost:8000/api/integration/google/calls";
