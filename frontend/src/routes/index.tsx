@@ -8,13 +8,14 @@ import AppLayout from "@/layout/app-layout";
 import BaseLayout from "@/layout/base-layout";
 import AuthRoute from "./authRoute";
 import ProtectedRoute from "./protectedRoute";
-import Integrations from "@/pages/integrations"; // Ensure you have this import
+import UserEventsPage from "@/pages/external_page/user-events";
+import UserSingleEventPage from "@/pages/external_page/user-single-event";
 
 function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Authentication Routes */}
+        {/* Auth Routes */}
         <Route path="/" element={<AuthRoute />}>
           <Route element={<BaseLayout />}>
             {authenticationRoutePaths.map((route) => (
@@ -25,13 +26,6 @@ function AppRoutes() {
               />
             ))}
           </Route>
-        </Route>
-
-        {/* Public Routes */}
-        <Route path="/" element={<BaseLayout />}>
-          {publicRoutePaths.map((route) => (
-            <Route key={route.path} path={route.path} element={route.element} />
-          ))}
         </Route>
 
         {/* Protected Routes */}
@@ -47,14 +41,14 @@ function AppRoutes() {
           </Route>
         </Route>
 
-        {/* OAuth Redirect Route */}
-        <Route
-          path="/app/integrations"
-          element={<Integrations />}
-        />
+        {/* Public External Pages (Dynamic Routes) */}
+        <Route path="/" element={<BaseLayout />}>
+          <Route path=":username" element={<UserEventsPage />} />
+          <Route path=":username/:slug" element={<UserSingleEventPage />} />
+        </Route>
 
-        {/* Catch-all for undefined routes */}
-        <Route path="*" element={<>404</>} />
+        {/* 404 */}
+        <Route path="*" element={<>404 Not Found</>} />
       </Routes>
     </BrowserRouter>
   );
