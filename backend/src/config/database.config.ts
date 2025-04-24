@@ -16,12 +16,8 @@ export const getDatabaseConfig = () => {
     synchronize: !isProduction,
     logging: isProduction ? false : ["error"],
     ssl: isProduction
-      ? {
-          rejectUnauthorized: true,
-        }
-      : {
-          rejectUnauthorized: false,
-        },
+      ? { rejectUnauthorized: false }
+      : false,
   });
 };
 
