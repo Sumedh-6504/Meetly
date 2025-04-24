@@ -5,6 +5,7 @@ import {
   Strategy as JwtStrategy,
   ExtractJwt,
   StrategyOptions,
+  VerifiedCallback,
 } from "passport-jwt";
 
 interface JwtPayload {
@@ -19,24 +20,28 @@ const options: StrategyOptions = {
 };
 
 passport.use(
-  new JwtStrategy(options, async (payload: JwtPayload, done) => {
-    try {
-      const user = await findByIdUserService(payload.userId);
-      if (!user) {
-        return done(null, false);
+  new JwtStrategy(
+    options,
+    async (payload: JwtPayload, done: VerifiedCallback) => {
+      try {
+        const user = await findByIdUserService(payload.userId);
+        if (!user) {
+          return done(null, false);
+        }
+        return done(null, user);
+      } catch (error) {
+        return done(error, false);
       }
-      return done(null, user);
-    } catch (error) {
-      return done(error, false);
     }
-  })
+  )
 );
 
-passport.serializeUser((user: any, done) => {
-  done(user, null);
+// Optional: serialize/deserialize only needed if using sessions
+passport.serializeUser((user: Express.User, done) => {
+  done(null, user);
 });
-passport.deserializeUser((user: any, done) => {
-  done(user, null);
+passport.deserializeUser((user: Express.User, done) => {
+  done(null, user);
 });
 
 export const passportAuthenticateJwt = passport.authenticate("jwt", {
