@@ -62,19 +62,19 @@ The project includes:
 
 1. **Clone the repo**
    ```bash
-   git clone https://github.com/Sumedh-6504/Meetly.git
-   cd Meetly
+      git clone https://github.com/Sumedh-6504/Meetly.git
+      cd Meetly
 
 # in the root
-npm install
+      npm install
 
 # in frontend
-cd frontend
-npm install
+      cd frontend
+      npm install
 
 # in backend
-cd ../backend
-npm install
+      cd ../backend
+      npm install
 
 DB_HOST=<your_postgres_host>
 DB_PORT=5432
@@ -86,111 +86,111 @@ DB_NAME=<your_db_name>
 # Start the Servers
 
 # backend
-cd backend
-node dist/index.js
+      cd backend
+      node dist/index.js
 
 # frontend
-cd ../frontend
-npm run dev
+      cd ../frontend
+      npm run dev
 
 # 📂Project Structure
 
-MEETLY/
-│
-├── backend/
-│   ├── src/
-│   │   ├── @types/                  # Custom TypeScript declarations
-│   │   ├── config/
-│   │   │   ├── env.ts               # Environment variable loader
-│   │   │   ├── google.ts            # Google OAuth2 & Calendar config
-│   │   │   └── database.ts          # PostgreSQL connection
-│   │   │
-│   │   ├── controllers/
-│   │   │   ├── auth.controller.ts   # Google OAuth callbacks
-│   │   │   └── meeting.controller.ts
-│   │   │
-│   │   ├── databases/
-│   │   │   └── postgres.ts          # DB pool & queries
-│   │   │
-│   │   ├── enums/                   # Enums (roles, status, scopes)
-│   │   │
-│   │   ├── middlewares/
-│   │   │   ├── auth.middleware.ts   # JWT & OAuth verification
-│   │   │   └── error.middleware.ts
-│   │   │
-│   │   ├── routes/
-│   │   │   ├── auth.routes.ts       # /auth/google
-│   │   │   └── meeting.routes.ts    # /meetings
-│   │   │
-│   │   ├── services/
-│   │   │   ├── auth.service.ts      # OAuth logic
-│   │   │   ├── google.service.ts    # Google Calendar API calls
-│   │   │   └── meeting.service.ts   # Business logic
-│   │   │
-│   │   ├── utils/
-│   │   │   ├── jwt.ts               # Token helpers
-│   │   │   ├── logger.ts
-│   │   │   └── validators.ts
-│   │   │
-│   │   └── index.ts                 # Server entry point
-│   │
-│   ├── dist/                        # Compiled JS
-│   ├── .env
-│   ├── package.json
-│   └── tsconfig.json
-│
-├── frontend/
-│   ├── src/
-│   │   ├── assets/
-│   │   ├── components/
-│   │   │   ├── auth/                # Google Sign-In components
-│   │   │   └── meeting/
-│   │   │
-│   │   ├── context/
-│   │   │   └── AuthContext.tsx      # User & token state
-│   │   │
-│   │   ├── hooks/
-│   │   │   ├── useAuth.ts
-│   │   │   └── useMeetings.ts
-│   │   │
-│   │   ├── lib/
-│   │   │   ├── api.ts               # Axios / Fetch wrapper
-│   │   │   └── google.ts            # Google OAuth helpers
-│   │   │
-│   │   ├── pages/
-│   │   │   ├── Login.tsx
-│   │   │   ├── Dashboard.tsx
-│   │   │   └── Calendar.tsx
-│   │   │
-│   │   ├── routes/
-│   │   │   └── AppRoutes.tsx
-│   │   │
-│   │   ├── store/
-│   │   │   └── meeting.store.ts
-│   │   │
-│   │   ├── types/
-│   │   │   └── index.ts
-│   │   │
-│   │   ├── App.tsx
-│   │   └── main.tsx
-│   │
-│   ├── .env
-│   ├── vite.config.ts
-│   └── tailwind.config.js
-│
-└── README.md
+      MEETLY/
+      │
+      ├── backend/
+      │   ├── src/
+      │   │   ├── @types/                  # Custom TypeScript declarations
+      │   │   ├── config/
+      │   │   │   ├── env.ts               # Environment variable loader
+      │   │   │   ├── google.ts            # Google OAuth2 & Calendar config
+      │   │   │   └── database.ts          # PostgreSQL connection
+      │   │   │
+      │   │   ├── controllers/
+      │   │   │   ├── auth.controller.ts   # Google OAuth callbacks
+      │   │   │   └── meeting.controller.ts
+      │   │   │
+      │   │   ├── databases/
+      │   │   │   └── postgres.ts          # DB pool & queries
+      │   │   │
+      │   │   ├── enums/                   # Enums (roles, status, scopes)
+      │   │   │
+      │   │   ├── middlewares/
+      │   │   │   ├── auth.middleware.ts   # JWT & OAuth verification
+      │   │   │   └── error.middleware.ts
+      │   │   │
+      │   │   ├── routes/
+      │   │   │   ├── auth.routes.ts       # /auth/google
+      │   │   │   └── meeting.routes.ts    # /meetings
+      │   │   │
+      │   │   ├── services/
+      │   │   │   ├── auth.service.ts      # OAuth logic
+      │   │   │   ├── google.service.ts    # Google Calendar API calls
+      │   │   │   └── meeting.service.ts   # Business logic
+      │   │   │
+      │   │   ├── utils/
+      │   │   │   ├── jwt.ts               # Token helpers
+      │   │   │   ├── logger.ts
+      │   │   │   └── validators.ts
+      │   │   │
+      │   │   └── index.ts                 # Server entry point
+      │   │
+      │   ├── dist/                        # Compiled JS
+      │   ├── .env
+      │   ├── package.json
+      │   └── tsconfig.json
+      │
+      ├── frontend/
+      │   ├── src/
+      │   │   ├── assets/
+      │   │   ├── components/
+      │   │   │   ├── auth/                # Google Sign-In components
+      │   │   │   └── meeting/
+      │   │   │
+      │   │   ├── context/
+      │   │   │   └── AuthContext.tsx      # User & token state
+      │   │   │
+      │   │   ├── hooks/
+      │   │   │   ├── useAuth.ts
+      │   │   │   └── useMeetings.ts
+      │   │   │
+      │   │   ├── lib/
+      │   │   │   ├── api.ts               # Axios / Fetch wrapper
+      │   │   │   └── google.ts            # Google OAuth helpers
+      │   │   │
+      │   │   ├── pages/
+      │   │   │   ├── Login.tsx
+      │   │   │   ├── Dashboard.tsx
+      │   │   │   └── Calendar.tsx
+      │   │   │
+      │   │   ├── routes/
+      │   │   │   └── AppRoutes.tsx
+      │   │   │
+      │   │   ├── store/
+      │   │   │   └── meeting.store.ts
+      │   │   │
+      │   │   ├── types/
+      │   │   │   └── index.ts
+      │   │   │
+      │   │   ├── App.tsx
+      │   │   └── main.tsx
+      │   │
+      │   ├── .env
+      │   ├── vite.config.ts
+      │   └── tailwind.config.js
+      │
+      └── README.md
 
 # 🔵HIGH LEVEL ARCHITECTURE
 
-User
- ↓
-Frontend (React + Vite)
- ↓  HTTPS (JWT / OAuth Token)
-Backend (Node.js + Express)
- ↓
-TypeORM (Supabase)
- ↓
-Google APIs (OAuth2 & Calendar)
+      User
+       ↓
+      Frontend (React + Vite)
+       ↓  HTTPS (JWT / OAuth Token)
+      Backend (Node.js + Express)
+       ↓
+      TypeORM (Supabase)
+       ↓
+      Google APIs (OAuth2 & Calendar)
 
 ## 🙌 Conclusion
 
