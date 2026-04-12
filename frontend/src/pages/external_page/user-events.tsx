@@ -1,3 +1,4 @@
+```javascript
 import { Link, useParams } from "react-router-dom";
 import { ArrowRight, Clock } from "lucide-react";
 import PageContainer from "./_components/page-container";
@@ -11,7 +12,7 @@ const UserEventsPage = () => {
   const username = param.username as string;
 
   const { data, isFetching, isLoading, isError, error } = useQuery({
-    queryKey: ["public_events"],
+    queryKey: ["public_events", username], // include username in query key
     queryFn: () => getAllPublicEventQueryFn(username),
   });
 
@@ -47,7 +48,7 @@ const UserEventsPage = () => {
                 {events?.map((event, index) => (
                   <Link
                     key={index}
-                    to={`/${username}/${event.slug}`}
+                    to={`/${encodeURIComponent(username)}/${event.slug}`}
                     className="group flex-[0_1_calc(100%-40px)] md:flex-[0_1_calc(50%-40px)] min-h-[150px] m-5 p-5 pr-1 border-t border-[rgba(26,26,26,0.1)] transition-all hover:!bg-[#e5efff] hover:shadow-xs"
                   >
                     <div className="flex flex-col">
@@ -80,3 +81,4 @@ const UserEventsPage = () => {
 };
 
 export default UserEventsPage;
+```
