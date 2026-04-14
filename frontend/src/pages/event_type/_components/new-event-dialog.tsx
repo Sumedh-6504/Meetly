@@ -6,10 +6,10 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  Footer,
+  Header,
+  Title,
+  Trigger,
 } from "@/components/ui/dialog";
 import {
   Form,
@@ -42,7 +42,14 @@ const NewEventDialog = (props: { btnVariant?: string }) => {
   const [selectedLocationType, setSelectedLocationType] =
     useState<VideoConferencingPlatform | null>(null);
 
-  const [error, setError] = useState<string | null>(null);
+  type ErrorState = null | {
+    prefix: string;
+    linkUrl?: string;
+    linkText?: string;
+    suffix: string;
+  };
+
+  const [error, setError] = useState<ErrorState>(null);
   const [isChecking, setIsChecking] = useState(false);
   const [appConnected, setAppConnected] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -91,9 +98,12 @@ const NewEventDialog = (props: { btnVariant?: string }) => {
         );
 
         if (!isConnected) {
-          setError(
-            `Google Meet is not connected. <a href=${PROTECTED_ROUTES.INTEGRATIONS} target="_blank" class='underline text-primary'>Visit the integration page</a> to connect your account.`
-          );
+          setError({
+            prefix: "Google Meet is not connected. Please visit ",
+            linkUrl: PROTECTED_ROUTES.INTEGRATIONS,
+            linkText: "the integration page",
+            suffix: " to connect your account.",
+          });
           return;
         }
         setError(null);
@@ -102,7 +112,10 @@ const NewEventDialog = (props: { btnVariant?: string }) => {
         form.trigger("locationType");
       } catch (error) {
         console.log(error);
-        setError("Failed to check Google Meet integration status.");
+        setError({
+          prefix: "Failed to check Google Meet integration status.",
+          suffix: "",
+        });
       } finally {
         setIsChecking(false);
       }
@@ -132,7 +145,7 @@ const NewEventDialog = (props: { btnVariant?: string }) => {
           toast.success("Event created successfully");
         },
         onError: () => {
-          toast.success("Failed to create event");
+          toast.error("Failed to create event");
         },
       }
     );
@@ -140,7 +153,7 @@ const NewEventDialog = (props: { btnVariant?: string }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
+      <Trigger asChild>
         <Button
           variant={btnVariant ? "default" : "outline"}
           size="lg"
@@ -152,14 +165,14 @@ const NewEventDialog = (props: { btnVariant?: string }) => {
           <PlusIcon className="w-4 h-4" />
           <span>New Event Type</span>
         </Button>
-      </DialogTrigger>
+      </Trigger>
       <DialogContent className="sm:max-w-[500px] !px-0 pb-0">
-        <DialogHeader className="px-6">
-          <DialogTitle className="text-xl">Add a new event type</DialogTitle>
-          <DialogDescription>
+        <Header className="px-6">
+          <Title className="text-xl">Add a new event type</Title>
+          <Description>
             Create a new event type for people to book times with.
-          </DialogDescription>
-        </DialogHeader>
+          </Description>
+        </Header>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <div className="space-y-4 px-6">
@@ -281,11 +294,20 @@ const NewEventDialog = (props: { btnVariant?: string }) => {
 
                     {error ? (
                       <FormMessage>
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: error,
-                          }}
-                        />
+                        <span>
+                          {error.prefix}
+                          {error.linkUrl && (
+                            <a
+                              href={error.linkUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="underline text-primary"
+                            >
+                              {error.linkText}
+                            </a>
+                          )}
+                          {error.suffix}
+                        </span>
                       </FormMessage>
                     ) : (
                       <FormMessage />
@@ -295,7 +317,7 @@ const NewEventDialog = (props: { btnVariant?: string }) => {
               />
             </div>
 
-            <DialogFooter
+            <Footer
               className="bg-[#f6f7f9] border-t px-6 py-3 !mt-6
              border-[#e5e7eb] rounded-b-[8px]"
             >
@@ -306,7 +328,7 @@ const NewEventDialog = (props: { btnVariant?: string }) => {
                   <span>Create</span>
                 )}
               </Button>
-            </DialogFooter>
+            </Footer>
           </form>
         </Form>
       </DialogContent>
