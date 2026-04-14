@@ -3,7 +3,6 @@ import {
   BeforeUpdate,
   Column,
   CreateDateColumn,
-  UpdateDateColumn,
   Entity,
   JoinColumn,
   OneToMany,
@@ -67,7 +66,7 @@ export class User {
   @BeforeInsert()
   @BeforeUpdate()
   async hashPassword(): Promise<void> {
-    if (this.password) {
+    if (this.password != null && typeof this.password === 'string' && !/^\$2[abxy]\$/.test(this.password)) {
       this.password = await hashValue(this.password);
     }
   }
