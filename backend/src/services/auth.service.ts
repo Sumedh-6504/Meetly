@@ -1,3 +1,4 @@
+
 import { v4 as uuidv4 } from "uuid";
 import { AppDataSource } from "../config/database.config";
 import { Availability } from "../databases/entities/availability.entity";
@@ -25,7 +26,7 @@ export const registerService = async (registerDto: RegisterDto) => {
   });
 
   if (existingUser) {
-    throw new BadRequestException("User already exists");
+    throw new BadRequestException("Invalid data");
   }
 
   const username = await generateUsername(registerDto.name);
@@ -61,14 +62,13 @@ export const loginService = async (loginDto: LoginDto) => {
     where: { email: loginDto.email },
   });
 
-  if (!user) {
-    throw new NotFoundException("User Not Found!");
+  let isValidPassword = false;
+  if (user) {
+    isValidPassword = await user.comparePassword(loginDto.password);
   }
 
-  const isValidPassword = await user.comparePassword(loginDto.password);
-
-  if (!isValidPassword) {
-    throw new UnauthorizedException("Invalid Credentials/Email");
+  if (!user || !isValidPassword) {
+    throw new BadRequestException("Invalid data");
   }
 
   const { token, expiresAt } = signJwtToken({ userId: user.id });
